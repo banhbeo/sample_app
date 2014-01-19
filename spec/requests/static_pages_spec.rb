@@ -1,46 +1,39 @@
 require 'spec_helper'
 
-describe "Home Page" do
-  let(:title) { 'Ruby on Rails Tutorial Sample App' }
-  it "shoule have the content 'Sample App'" do
-  	visit '/static_pages/home'
-  	expect(page).to have_content('Sample App')
+describe "Static Pages" do
+
+  subject { page }
+
+  describe "Home Page" do
+
+    before { visit root_path }
+
+    it { should have_content('Sample App') }
+
+    it { should_not have_title("Ruby on Rails Tutorial Sample App | Home") }
   end
 
-  it "should have the right title" do
-    visit '/static_pages/home'
-    expect(page).to have_title("#{title} | Home")
-  end
-end
+  describe "Help Page" do
+    before { visit help_path }
 
-describe "Help Page" do
-  it "shoule have the content 'Help'" do
-  	visit '/static_pages/help'
-  	expect(page).to have_content('Help')
+    it { should have_content('Help') }
+    
+    it { should have_title('Ruby on Rails Tutorial Sample App | Help') }
   end
 
-  it "should have the right title" do
-    visit '/static_pages/help'
-    expect(page).to have_title('Ruby on Rails Tutorial Sample App | Help')
-  end
-end
+  describe "About page" do
+    before { visit about_path }
 
-describe "About page" do
+    it { should have_content('About Us') }
 
-  it "should have the content 'About Us'" do
-    visit '/static_pages/about'
-    expect(page).to have_content('About Us')
+    it { should have_title('Ruby on Rails Tutorial Sample App | About') }
   end
 
-  it "should have the right title" do
-    visit '/static_pages/about'
-    expect(page).to have_title('Ruby on Rails Tutorial Sample App | About')
-  end
-end
+  describe 'Contact page' do
+    before { visit contact_path }
 
-describe 'Contact page' do
-  it "should have the title 'Ruby on Rails Tutorial Sample App | Contact'" do
-    visit '/static_pages/contact'
-    expect(page).to have_title('Ruby on Rails Tutorial Sample App | Contact')
+    it { should have_content('Contact') }
+
+    it { should have_title('Ruby on Rails Tutorial Sample App | Contact') }
   end
 end
